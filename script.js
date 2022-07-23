@@ -5,6 +5,7 @@ const canvas = document.getElementById('container')
 const context = canvas.getContext("2d")
 
 
+
 /**
  * Objects
  */
@@ -18,19 +19,19 @@ const ball = {
 }
 
 const leftPlayer = {
-    height: 80,
+    height: 40,
     width: 10,
     positionX: 10,
-    positionY: 20,
+    positionY: canvas.height/2 - 40/2,
     color: 'white',
     player: 'left'
 }
 
 const rightPlayer = {
-    height: 80,
+    height: 40,
     width: 10,
-    positionX: 10,
-    positionY: 20,
+    positionX: canvas.width - 20,
+    positionY: canvas.height/2 - 40/2,
     color: 'white',
     player: 'right'
 }
@@ -49,19 +50,28 @@ const game = {
 /**
  * Update and Draw
  */
-
-function drawAll(){
-    context.clearRect(0,0, canvas.width, canvas.height);
+function drawLeftPlayer(){
     context.beginPath();
     context.fillStyle = leftPlayer.color;
-    context.rect(leftPlayer.positionX, leftPlayer.positionY, 10, 100);
+    context.rect(leftPlayer.positionX, leftPlayer.positionY, leftPlayer.width, leftPlayer.height);
     context.fill();
 }
 
-function updateStates(){
-    leftPlayer.positionX++;
+function drawRightPlayer(){
+    context.beginPath();
+    context.fillStyle = rightPlayer.color;
+    context.rect(rightPlayer.positionX, rightPlayer.positionY, rightPlayer.width, rightPlayer.height);
+    context.fill();
 }
 
+function drawAll(){
+    context.clearRect(0,0, canvas.width, canvas.height);
+    drawLeftPlayer()
+    drawRightPlayer()
+}
+
+function updateStates(){
+}
 
 /**
  * Game Loop and Render
