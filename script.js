@@ -1,4 +1,21 @@
 /**
+ * Support
+ */
+function checkCompatibilty() {
+    if(window.innerWidth < 560){
+        document.getElementsByClassName('small-device')[0].style.display = "flex";
+        document.getElementsByClassName('canvas-container')[0].style.display = "none";
+    }else{
+        document.getElementsByClassName('small-device')[0].style.display = "none";
+        document.getElementsByClassName('canvas-container')[0].style.display = "flex";
+    }
+}
+checkCompatibilty()
+window.addEventListener('resize', ()=>{checkCompatibilty()})
+
+
+
+/**
  * Canvas and Context
  */
 const canvas = document.getElementById('container')
