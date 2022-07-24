@@ -93,6 +93,12 @@ function drawAll() {
 }
 
 
+function resetBall() {
+    ball.positionX = canvas.width / 2 + 8
+    ball.positionY = canvas.height / 2 + 8
+}
+
+
 function updateKeyPresses() {
     if (keyPressed['W']) {
         if (leftPlayer.positionY > 0) {
@@ -121,9 +127,23 @@ function updateStates() {
         ball.velocityY = -ball.velocityY;
     }
 
-    if ((ball.positionX + ball.radius) >= (canvas.width - (rightPlayer.width + 10)) ||
-        (ball.positionX - ball.radius) <= ((rightPlayer.width + 10))) {
+    if (
+        (ball.positionX + ball.radius >= canvas.width - (rightPlayer.width + 10) &&
+            (ball.positionY >= rightPlayer.positionY && ball.positionY <= rightPlayer.positionY + rightPlayer.height)) ||
+
+        (ball.positionX - ball.radius <= (leftPlayer.width + 10) &&
+            (ball.positionY >= leftPlayer.positionY && ball.positionY <= leftPlayer.positionY + leftPlayer.height))
+    ) {
         ball.velocityX = -ball.velocityX;
+        console.log(ball.velocityX);
+    }
+
+    if (ball.positionX > canvas.width - (rightPlayer.width)) {
+        game.leftScore++
+        resetBall()
+    } else if (ball.positionX < rightPlayer.width) {
+        game.rightScore++
+        resetBall()
     }
 
     ball.positionX += ball.velocityX;
