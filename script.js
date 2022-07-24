@@ -111,6 +111,7 @@ function resetBall() {
     }, 1000)
 }
 
+
 function collisionTimeLag() {
     activated = false
     console.log('Deactivated Collision')
