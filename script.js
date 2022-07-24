@@ -136,6 +136,26 @@ function setScore() {
 }
 
 
+function gameOver(){
+    if(game.leftScore === 2){
+        console.log('Left Wins')
+        resetGame()
+    }else if(game.rightScore === 2){
+        console.log('Right Wins')
+        resetGame()
+    }
+}
+
+
+function resetGame(){
+    game.leftScore = 0
+    game.rightScore = 0
+    ball.positionX = 0
+    ball.positionY = 0
+    updateDefault()
+}
+
+
 function updateKeyPresses() {
     if (keyPressed['W']) {
         if (leftPlayer.positionY > 0) {
@@ -178,6 +198,7 @@ function updateStates() {
     }
 
     setScore()
+    gameOver()
 
     ball.positionX += ball.velocityX;
     ball.positionY += ball.velocityY;
