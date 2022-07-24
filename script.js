@@ -42,7 +42,7 @@ const leftPlayer = {
     positionY: canvas.height / 2 - 40 / 2,
     color: 'white',
     player: 'left',
-    speed: 2
+    speed: 1
 }
 
 const rightPlayer = {
@@ -52,7 +52,7 @@ const rightPlayer = {
     positionY: canvas.height / 2 - 40 / 2,
     color: 'white',
     player: 'right',
-    speed: 2
+    speed: 1
 }
 
 
