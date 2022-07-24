@@ -12,8 +12,8 @@ const ball = {
     radius: 8,
     positionX: canvas.width / 2 + 8,
     positionY: canvas.height / 2 + 8,
-    velocityX: 1.5,
-    velocityY: 1.5,
+    velocityX: 2,
+    velocityY: 2,
     color: 'white'
 }
 
@@ -24,7 +24,7 @@ const leftPlayer = {
     positionY: canvas.height / 2 - 100 / 2,
     color: 'white',
     player: 'left',
-    speed: 1
+    speed: 2
 }
 
 const rightPlayer = {
@@ -34,7 +34,7 @@ const rightPlayer = {
     positionY: canvas.height / 2 - 100 / 2,
     color: 'white',
     player: 'right',
-    speed: 1
+    speed: 2
 }
 
 
@@ -137,10 +137,10 @@ function setScore() {
 
 
 function gameOver(){
-    if(game.leftScore === 2){
+    if(game.leftScore === 5){
         console.log('Left Wins')
         resetGame()
-    }else if(game.rightScore === 2){
+    }else if(game.rightScore === 5){
         console.log('Right Wins')
         resetGame()
     }
@@ -269,8 +269,8 @@ requestAnimationFrame(gameLoop);
  * Support
  */
 function updateDefault() {
-    canvas.width = window.innerWidth * 0.6
-    canvas.height = window.innerHeight * 0.8
+    canvas.width = Math.min(window.innerWidth * 0.6, 800)
+    canvas.height = Math.min(window.innerHeight * 0.8, 600)
 
     ball.positionX = canvas.width / 2 + ball.radius
     ball.positionY = canvas.height / 2 + ball.radius
@@ -292,5 +292,6 @@ function resizeHandler() {
 
     updateDefault()
 }
+
 resizeHandler()
 window.addEventListener('resize', () => { resizeHandler() })
