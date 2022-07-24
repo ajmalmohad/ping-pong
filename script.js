@@ -13,7 +13,7 @@ const ball = {
     positionX: canvas.width / 2 + 8,
     positionY: canvas.height / 2 + 8,
     velocityX: 1,
-    velocityY: -1,
+    velocityY: 1,
     color: 'white'
 }
 
@@ -117,17 +117,14 @@ function updateKeyPresses() {
 }
 
 function updateStates() {
-    if ((ball.positionY + ball.radius) === canvas.height || (ball.positionY - ball.radius) === 0) {
+    if ((ball.positionY + ball.radius) >= canvas.height || (ball.positionY - ball.radius) <= 0) {
         ball.velocityY = -ball.velocityY;
     }
 
-    if ((ball.positionX + ball.radius) === (canvas.width - (rightPlayer.width + 10)) ||
-        (ball.positionX - ball.radius) === (0 + (rightPlayer.width + 10))) {
+    if ((ball.positionX + ball.radius) >= (canvas.width - (rightPlayer.width + 10)) ||
+        (ball.positionX - ball.radius) <= ((rightPlayer.width + 10))) {
         ball.velocityX = -ball.velocityX;
     }
-
-    console.log(ball.positionX, canvas.width);
-
 
     ball.positionX += ball.velocityX;
     ball.positionY += ball.velocityY;
