@@ -35,6 +35,22 @@ body{
     justify-content: center;
 }
 
+.canvas-container p{
+    font-size: 50px;
+    font-weight: 600;
+    color: white;
+    min-width: 60px;
+}
+
+.canvas-container p:first-child{
+    margin-right: 10%;
+}
+
+.canvas-container p:last-child{
+    margin-left: 10%;
+}
+
+
 .canvas-container .wrapper{
     border: 4px solid white;
     border-radius: 5px;

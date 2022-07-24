@@ -98,15 +98,40 @@ function drawAll() {
 function resetBall() {
     ball.positionX = canvas.width / 2 + 8
     ball.positionY = canvas.height / 2 + 8
+
+    let velocityX = ball.velocityX
+    let velocityY = ball.velocityY
+
+    ball.velocityX = 0
+    ball.velocityY = 0
+
+    setTimeout(() => {
+        ball.velocityX = -velocityX
+        ball.velocityY = -velocityY
+    }, 1000)
 }
 
-function collisionTimeLag(){
+function collisionTimeLag() {
     activated = false
     console.log('Deactivated Collision')
-    setTimeout(()=>{
-        activated=true
+    setTimeout(() => {
+        activated = true
         console.log('Ready For Collision')
-    },1000)
+    }, 1000)
+}
+
+
+function setScore() {
+    if (ball.positionX > canvas.width - (rightPlayer.width)) {
+        game.leftScore++
+        resetBall()
+    } else if (ball.positionX < rightPlayer.width) {
+        game.rightScore++
+        resetBall()
+    }
+
+    document.getElementsByClassName('left')[0].textContent = game.leftScore
+    document.getElementsByClassName('right')[0].textContent = game.rightScore
 }
 
 
@@ -151,13 +176,7 @@ function updateStates() {
         }
     }
 
-    if (ball.positionX > canvas.width - (rightPlayer.width)) {
-        game.leftScore++
-        resetBall()
-    } else if (ball.positionX < rightPlayer.width) {
-        game.rightScore++
-        resetBall()
-    }
+    setScore()
 
     ball.positionX += ball.velocityX;
     ball.positionY += ball.velocityY;
