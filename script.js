@@ -3,6 +3,7 @@
  */
 const canvas = document.getElementById('container')
 const context = canvas.getContext("2d")
+sessionStorage.setItem("winner", "None");
 
 
 /**
@@ -44,7 +45,8 @@ const rightPlayer = {
 const game = {
     leftScore: 0,
     rightScore: 0,
-    turn: 0
+    turn: 0,
+    topScore: 5
 }
 
 const keyPressed = {
@@ -137,11 +139,15 @@ function setScore() {
 
 
 function gameOver(){
-    if(game.leftScore === 5){
+    if(game.leftScore === game.topScore){
         console.log('Left Wins')
+        sessionStorage.setItem("winner", "Left");
+        window.location.href = "winner.html";
         resetGame()
-    }else if(game.rightScore === 5){
+    }else if(game.rightScore === game.topScore){
         console.log('Right Wins')
+        sessionStorage.setItem("winner", "Right");
+        window.location.href = "winner.html";
         resetGame()
     }
 }
