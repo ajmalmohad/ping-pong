@@ -12,8 +12,8 @@ const ball = {
     radius: 8,
     positionX: canvas.width / 2 + 8,
     positionY: canvas.height / 2 + 8,
-    velocityX: 1,
-    velocityY: 1,
+    velocityX: 1.5,
+    velocityY: 1.5,
     color: 'white'
 }
 
@@ -53,6 +53,8 @@ const keyPressed = {
     Up: false,
     Down: false
 }
+
+let activated = true;
 
 
 
@@ -98,6 +100,15 @@ function resetBall() {
     ball.positionY = canvas.height / 2 + 8
 }
 
+function collisionTimeLag(){
+    activated = false
+    console.log('Deactivated Collision')
+    setTimeout(()=>{
+        activated=true
+        console.log('Ready For Collision')
+    },1000)
+}
+
 
 function updateKeyPresses() {
     if (keyPressed['W']) {
@@ -134,8 +145,10 @@ function updateStates() {
         (ball.positionX - ball.radius <= (leftPlayer.width + 10) &&
             (ball.positionY >= leftPlayer.positionY && ball.positionY <= leftPlayer.positionY + leftPlayer.height))
     ) {
-        ball.velocityX = -ball.velocityX;
-        console.log(ball.velocityX);
+        if (activated) {
+            ball.velocityX = -ball.velocityX
+            collisionTimeLag()
+        }
     }
 
     if (ball.positionX > canvas.width - (rightPlayer.width)) {
