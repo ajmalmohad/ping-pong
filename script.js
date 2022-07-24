@@ -46,7 +46,8 @@ const game = {
     leftScore: 0,
     rightScore: 0,
     turn: 0,
-    topScore: 5
+    topScore: 5,
+    speedIncreaseHit: 3,
 }
 
 const keyPressed = {
@@ -57,6 +58,7 @@ const keyPressed = {
 }
 
 let activated = true;
+let hits = 0;
 
 
 
@@ -198,6 +200,7 @@ function updateStates() {
             (ball.positionY >= leftPlayer.positionY && ball.positionY <= leftPlayer.positionY + leftPlayer.height))
     ) {
         if (activated) {
+            hits++;
             ball.velocityX = -ball.velocityX
             collisionTimeLag()
         }
@@ -205,6 +208,16 @@ function updateStates() {
 
     setScore()
     gameOver()
+
+    if(hits === game.speedIncreaseHit){
+        hits = 0
+        ball.velocityX += 0.2
+        ball.velocityY += 0.2
+        leftPlayer.speed += 0.2
+        rightPlayer.speed += 0.2
+
+        console.log(ball.velocityX, leftPlayer.speed);
+    }
 
     ball.positionX += ball.velocityX;
     ball.positionY += ball.velocityY;
